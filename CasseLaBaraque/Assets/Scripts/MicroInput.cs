@@ -18,7 +18,6 @@ public class MicroInput : MonoBehaviour
         {
             microphoneInput = Microphone.Start(Microphone.devices[0], true, 999, 44100);
             microInitialized = true;
-            Debug.Log("micro Init");
         }
     }
 
