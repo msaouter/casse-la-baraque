@@ -21,9 +21,9 @@ public class MicroInput : MonoBehaviour
         }
     }
 
-    public float GetMicroLoudness()
-    {
-        return clipLoudness;
+    public float GetMicroLoudness()
+    {
+        return clipLoudness;
     } 
 
     // Update is called once per frame
