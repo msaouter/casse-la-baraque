@@ -29,6 +29,7 @@ public class MicroInput : MonoBehaviour
         if(!microInitialized)
             Awake();
 
+
         //get mic volume
         int dec = 128;
         float[] waveData = new float[dec];
