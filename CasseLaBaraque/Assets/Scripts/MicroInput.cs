@@ -8,8 +8,8 @@ public class MicroInput : MonoBehaviour
 {
     AudioClip microphoneInput;
     bool microInitialized;
-    public float sensitivity;
-    public bool party;
+    float clipLoudness = 0f;
+
 
     void Awake()
     {
@@ -22,6 +22,11 @@ public class MicroInput : MonoBehaviour
         }
     }
 
+    public float GetMicroLoudness()
+    {
+        return clipLoudness;
+    } 
+
     // Update is called once per frame
     void Update()
     {
@@ -31,35 +36,13 @@ public class MicroInput : MonoBehaviour
 
 
         //get mic volume
-        int dec = 128;
-        float[] waveData = new float[dec];
-
-        int micPosition = Microphone.GetPosition(null) - (dec + 1); // null targets the first microphonee
-        microphoneInput.GetData(waveData, micPosition);
-
-        // Getting the higher level on the last 128 samples
-        float levelMax = 0;
-
-        for (int i = 0; i < dec; i++)
+        float[] waveData = new float[microphoneInput.samples];
+        microphoneInput.GetData(waveData, 0);
+        
+        foreach (var sample in waveData)
         {
-            float wavePeak = waveData[i] * waveData[i];
-            if(levelMax < wavePeak)
-            {
-                levelMax = wavePeak;
-            }
+            clipLoudness += Mathf.Abs(sample);
         }
-
-        float level = Mathf.Sqrt(Mathf.Sqrt(levelMax)) * 100;
-
-        //Conditions to party
-        if (level > sensitivity)
-        {
-            //activate Party anim
-            party = true;
-        }
-        if (level < sensitivity && party)
-        {
-            party = false;
-        }
+        clipLoudness /= waveData.Length;
     }
 }
