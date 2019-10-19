@@ -17,5 +17,5 @@ MonoBehaviour:
   EndTimeBetween2Checks: 10.7
   InitialRandomTimeBetween2Checks: 3.2
   EndRandomTimeBetween2Checks: 10.7
-  InitialReactionTime: 4.08
+  InitialReactionTime: 3.4
   EndReactionTime: 1.52
